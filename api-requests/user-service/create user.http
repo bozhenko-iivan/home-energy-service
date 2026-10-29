@@ -1,0 +1,13 @@
+###
+POST http://localhost:8080/api/v1/user
+Content-Type: application/json
+
+{
+  "name": "adolf",
+  "surname": "koch",
+  "email": "adolf@email.com",
+  "address": "dusserdolf",
+  "isAlerting": true,
+  "energyAlertingThreshold": 1
+}
+###
