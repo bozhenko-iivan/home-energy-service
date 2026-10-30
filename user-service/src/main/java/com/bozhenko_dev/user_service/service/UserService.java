@@ -27,9 +27,10 @@ public class UserService {
     }
 
     public UserResponseDto getUserById(Long id) {
-        Optional<User> user = userRepository.findById(id);
-
-        return user.map(UserMapper::toDto).orElse(null);
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new UserNotFoundException("User not found with id: " + id)
+        );
+        return UserMapper.toDto(user);
     }
 
     public void updateUser(Long id, UserRequestDto userDto) {
@@ -51,7 +52,6 @@ public class UserService {
         User user = userRepository.findById(id).orElseThrow(
                 () -> new UserNotFoundException("User with id " + id + " not found")
         );
-
         userRepository.delete(user);
     }
 }
