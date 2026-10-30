@@ -3,6 +3,7 @@ package com.bozhenko_dev.user_service.service;
 import com.bozhenko_dev.user_service.dto.UserRequestDto;
 import com.bozhenko_dev.user_service.dto.UserResponseDto;
 import com.bozhenko_dev.user_service.entity.User;
+import com.bozhenko_dev.user_service.exception.UserNotFoundException;
 import com.bozhenko_dev.user_service.mapper.UserMapper;
 import com.bozhenko_dev.user_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,7 @@ public class UserService {
 
     public void updateUser(Long id, UserRequestDto userDto) {
         User user = userRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("User not found")
+                () -> new UserNotFoundException("User with id " + id + " not found")
         );
 
         user.setName(userDto.name());
@@ -48,7 +49,7 @@ public class UserService {
 
     public void deleteUser(Long id) {
         User user = userRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("User not found")
+                () -> new UserNotFoundException("User with id " + id + " not found")
         );
 
         userRepository.delete(user);

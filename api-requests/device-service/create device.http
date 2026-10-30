@@ -1,0 +1,11 @@
+###
+POST http://localhost:8081/api/v1/device
+Content-Type: application/json
+
+{
+  "name": "myRing",
+  "location": "room-2",
+  "type": "DOORBELL",
+  "userId": 1
+}
+###
